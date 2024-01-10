@@ -68,5 +68,27 @@ button:focus-visible {
 }
 
 .header {
-  
+
+}
+
+.component {
+  width: 70px;
+  height: 70px;
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+.component img {
+  max-width: 65px;
+  max-height: 65px;
+}
+
+.memory-container {
+  display: grid;
+  grid-template-columns: repeat(7, 100px);
+  grid-template-rows: repeat(2, 100px);
+  gap: 60px;
+
+  padding-top: 40px;
 }
