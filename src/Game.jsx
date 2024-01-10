@@ -3,6 +3,8 @@ import { useState } from "react";
 
 export default function Game() {
 
+    shuffleArray(weaponTypes)
+
     return (
         <>
         <div className="memory-container">
@@ -17,7 +19,13 @@ export default function Game() {
 }
 
 let weaponTypes = ['1', '90', '170', '262', '345', '430', '515', '600', '698', '756', '832', '912', "997", '1076']
-let imgArray = []
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]
+    }
+}
 
 
 function MemoryComponent({imgData}) {
