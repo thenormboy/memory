@@ -72,11 +72,10 @@ button:focus-visible {
 }
 
 .component {
-  width: 70px;
-  height: 70px;
   background: white;
   padding: 18px;
   border-radius: 12px;
+  color: black;
 }
 
 .component img {
