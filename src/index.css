@@ -67,15 +67,13 @@ button:focus-visible {
   }
 }
 
-.header {
-
-}
-
 .component {
   background: white;
   padding: 18px;
   border-radius: 12px;
   color: black;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
 }
 
 .component img {

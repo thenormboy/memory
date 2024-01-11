@@ -1,29 +1,50 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
+let clickedWeapons = []
+
 export default function Game({weaponTypes}) {
 
     shuffleArray(weaponTypes)
 
     const [elements, setElements] = useState(weaponTypes)
-    const [count, setCount] = useState(0)
+    const [score, setScore] = useState(0)
+    const [bestScore, setBestScore] = useState(0)
 
-    function handleClick() {
+    function handleClick(event) {
         let changedArray = shuffleArray(elements)
-        //console.log(changedArray)
-        setCount(count + 1)
+
+        if (clickedWeapons.length == 14) {
+            clickedWeapons = []
+        }
+
+        if (!clickedWeapons.includes(event.target.className)) {
+            clickedWeapons.push(event.target.className)
+            setScore(score + 1)
+
+            if (score >= bestScore) {
+                setBestScore(score + 1)
+            }
+
+        } else {
+            setScore(0)
+            clickedWeapons = []
+        }
+
         setElements([...changedArray])
     }
 
-    console.log(count)
-
     return (
         <>
+        <div className="score-section">
+            <div>Score: {score}</div>
+            <div>Best Score: {bestScore}</div>
+        </div>
         <div className="memory-container">
         {elements.map((info, index) => {
             return (
-                <button className="component" onClick={() => handleClick()}>
-                    <MemoryComponent key={Date.now()} imgData={info}/>
+                <button className="component" onClick={(event) => handleClick(event)}>
+                    <MemoryComponent key={info} imgKey={info} imgData={info}/>
                 </button>
             )
         })}
@@ -41,11 +62,9 @@ function shuffleArray(array) {
 }
 
 
-function MemoryComponent({imgData}) {
+function MemoryComponent({imgData, imgKey}) {
 
     const [data, setData] = useState(null);
-
-    //console.log(imgData)
 
     useEffect(() => {
         fetch('https://mhw-db.com/weapons/' + imgData)
@@ -55,6 +74,6 @@ function MemoryComponent({imgData}) {
     }, []);
 
     return (
-        <img key={Date.now()} src={data} />
+        <img className={imgKey} src={data} />
     )
 }
